@@ -3,5 +3,5 @@ Desafio Desenvolvedor Fullstack do Serasa Experian
 
 Para entrar no diretório do projeto:
 ```
-  cd my-app
+  cd projeto-blog-pessoal
 ```
