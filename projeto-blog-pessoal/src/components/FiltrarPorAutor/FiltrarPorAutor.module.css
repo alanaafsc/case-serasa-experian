@@ -1,0 +1,31 @@
+.button {
+    position: relative;
+    width: 177px;
+    height: 40px;
+    padding: 8px 16px;
+    border-radius: 4px 0 0 0;
+    background: #DAF2EC;
+    top: 47px;
+    left: 24px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Inter';
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    color: #07A46C;
+}
+
+.button span {
+    width: 121px;
+    height: 19px;
+}
+
+.icon {
+    fill: #000000;
+    width: 24px;
+    height: 24px;
+}

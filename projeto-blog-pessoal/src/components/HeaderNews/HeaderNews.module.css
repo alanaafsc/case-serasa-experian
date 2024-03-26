@@ -1,0 +1,22 @@
+.header {
+    width: 1440px;
+    height: 82px;
+    position: relative; 
+}
+
+.rectangle {
+    position: absolute; /* Define o posicionamento absoluto para o retângulo */
+    top: 0; /* Alinha o retângulo ao topo do header */
+    left: 0; /* Alinha o retângulo à esquerda do header */
+    width: 1440px;
+    height: 82px;
+    background: #FFFFFF; 
+}
+
+.logo {
+    position: absolute; 
+    width: 98px;
+    height: 50px;
+    top: 16px;
+    left: 32px;
+}
