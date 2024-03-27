@@ -9,6 +9,8 @@
     border-radius: 8px;
     background: #F4F4FA;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .title {

@@ -1,0 +1,33 @@
+.lastNews {
+    width: 282px;
+    height: 96px;
+    padding: 16px;
+    gap: 4px;
+    border-radius: 4px;
+    border: 1px solid #CDCDDF;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.titleNew {
+    width: 250px;
+    height: 40px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: #2D2E30;
+}
+
+.dateNew {
+    width: 250px;
+    height: 20px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: left;
+    color: #E04C85;
+}
