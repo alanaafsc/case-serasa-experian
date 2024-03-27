@@ -1,0 +1,22 @@
+.lastArticles {
+    position: absolute;
+    top: 200px;
+    width: 330px;
+    height: 557px;
+    left: 1086px;
+    padding: 24px;
+    gap: 24px;
+    border-radius: 8px;
+    background: #F4F4FA;
+    box-sizing: border-box;
+}
+
+.title {
+    font-family: Inter;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.05px;
+    text-align: left;
+    color: #18191E;
+}
+

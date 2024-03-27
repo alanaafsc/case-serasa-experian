@@ -1,12 +1,12 @@
 .button {
     position: relative;
-    width: 177px;
+    width: 150px;
     height: 40px;
     padding: 8px 16px;
     border-radius: 4px;
     background: #DAF2EC;
-    top: 47px;
-    left: 24px;
+    top: 7px;
+    left: 217px;
     border: none;
     cursor: pointer;
     display: flex;
