@@ -9,12 +9,16 @@ import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => {
   return (
-    <div>
+    <div className="App">
       <HeaderNews />
-      <FiltrarPorAutor />    
-      <Ordenar />  
-      <Artigos />
-      <LastArticles />
+      <main className="main">
+        <FiltrarPorAutor />    
+        <Ordenar />  
+        <div className="content-container">
+          <Artigos />
+          <LastArticles />
+        </div>
+      </main>
       <Footer />
     </div>
   );

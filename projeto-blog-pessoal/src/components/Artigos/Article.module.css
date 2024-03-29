@@ -72,3 +72,11 @@
     height: Hug (24px)px;
     gap: 16px;
 }
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
