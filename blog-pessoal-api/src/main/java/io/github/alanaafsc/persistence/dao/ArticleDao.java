@@ -7,7 +7,10 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class ArticleDao {
@@ -23,17 +26,27 @@ public class ArticleDao {
         return query.getResultList();
     }
 
-    public List<ArticleDTO> buscarListaArtigosPorAutor(List<String> authors){
-        TypedQuery<ArticleDTO> query = em
-                .createNamedQuery("CONSULTAR_LISTA_ARTIGOS_POR_AUTOR", ArticleDTO.class);
-        query.setParameter("authors", authors);
-        return query.getResultList();
+    public List<ArticleDTO> buscarArtigosPorAutores(List<String> authorNames) {
+        List<ArticleDTO> resultList = new ArrayList<>();
+        for (String authorName : authorNames) {
+            TypedQuery<ArticleDTO> query = em.createNamedQuery("CONSULTAR_ARTIGOS_POR_AUTOR", ArticleDTO.class);
+            query.setParameter("author", authorName);
+            resultList.addAll(query.getResultList());
+        }
+        return resultList;
     }
 
-    public List<ArticleDTO> buscarListaArtigosPorData(String order){
-        TypedQuery<ArticleDTO> query = em
-                .createNamedQuery("CONSULTAR_LISTA_ARTIGOS_POR_DATA", ArticleDTO.class);
-        query.setParameter("order", order);
+    public List<ArticleDTO> buscarListaArtigosPorData(String order) {
+        String namedQuery;
+        if ("asc".equalsIgnoreCase(order)) {
+            namedQuery = "CONSULTAR_LISTA_ARTIGOS_POR_DATA_ASC";
+        } else if ("desc".equalsIgnoreCase(order)) {
+            namedQuery = "CONSULTAR_LISTA_ARTIGOS_POR_DATA_DESC";
+        } else {
+            throw new InvalidParameterException("Parâmetro de ordem inválido: " + order);
+        }
+
+        TypedQuery<ArticleDTO> query = em.createNamedQuery(namedQuery, ArticleDTO.class);
         return query.getResultList();
     }
 

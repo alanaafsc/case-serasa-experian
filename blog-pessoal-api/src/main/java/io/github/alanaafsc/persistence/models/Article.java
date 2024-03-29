@@ -38,15 +38,21 @@ import java.util.Date;
                 resultSetMapping = "ArticleMapping"
         ),
         @NamedNativeQuery(
-                name="CONSULTAR_LISTA_ARTIGOS_POR_AUTOR",
-                query = "SELECT title, content, author, publicationDate FROM articles.Article WHERE author IN :authors",
+                name="CONSULTAR_ARTIGOS_POR_AUTOR",
+                query = "SELECT title, content, author, publicationDate " +
+                        "FROM articles.Article " +
+                        "WHERE author = :author",
                 resultSetMapping = "ArticleMapping"
         ),
         @NamedNativeQuery(
-                name="CONSULTAR_LISTA_ARTIGOS_POR_DATA",
-                query = "SELECT title, content, author, publicationDate " +
-                        "FROM articles.Article " +
-                        "ORDER BY publicationDate :order",
+                name="CONSULTAR_LISTA_ARTIGOS_POR_DATA_ASC",
+                query = "SELECT title, content, author, publicationDate FROM articles.Article ORDER BY publicationDate ASC",
+                resultSetMapping = "ArticleMapping"
+        ),
+
+        @NamedNativeQuery(
+                name="CONSULTAR_LISTA_ARTIGOS_POR_DATA_DESC",
+                query = "SELECT title, content, author, publicationDate FROM articles.Article ORDER BY publicationDate DESC",
                 resultSetMapping = "ArticleMapping"
         ),
         @NamedNativeQuery(

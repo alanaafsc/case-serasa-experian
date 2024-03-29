@@ -2,6 +2,7 @@ package io.github.alanaafsc.rest;
 
 import io.github.alanaafsc.persistence.dao.ArticleDao;
 import io.github.alanaafsc.persistence.dto.ArticleDTO;
+import io.github.alanaafsc.persistence.dto.AutoresRequestDTO;
 import io.github.alanaafsc.persistence.models.Article;
 import io.github.alanaafsc.services.ArticleService;
 import jakarta.enterprise.context.RequestScoped;
@@ -14,6 +15,9 @@ import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+
+import java.security.InvalidParameterException;
+import java.util.List;
 
 @RequestScoped
 @Path("/v1/artigos")
@@ -39,11 +43,49 @@ public class ArticleResource {
         return Response.status(Response.Status.OK).entity(dao.buscarListaArtigos()).build();
     }
 
-    //obter artigos recentes
+    @GET
+    @Path("/recentes")
+    @Operation(summary = "Listar artigos recentes",
+            description = "Retorna uma lista de artigos recentes")
+    @APIResponse(
+            responseCode = "200",
+            description = "Artigo",
+            content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Article.class, type = SchemaType.ARRAY))})
+    public Response obtemArtigosRecentes() throws Exception  {
+        return Response.status(Response.Status.OK).entity(dao.buscarListaArtigosRecentes()).build();
+    }
 
-    //obter artigos por autor
+    @GET
+    @Path("/autores")
+    @Operation(summary = "Listar artigos por autores",
+            description = "Retorna uma lista de artigos por autores")
+    @APIResponse(
+            responseCode = "200",
+            description = "Artigo",
+            content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Article.class, type = SchemaType.ARRAY))})
+    public Response obtemArtigosPorAutores(@QueryParam("autores") List<String> authorNames) {
+        List<ArticleDTO> articles = dao.buscarArtigosPorAutores(authorNames);
+        return Response.ok(articles).build();
+    }
 
-    //obter artigos em ordem DESC E ASC por data
+    @GET
+    @Path("/order/{order}")
+    @Operation(summary = "Listar artigos por data",
+            description = "Retorna uma lista de artigos por data")
+    @APIResponse(
+            responseCode = "200",
+            description = "Artigo",
+            content = { @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = Article.class, type = SchemaType.ARRAY))})
+    public Response obtemArtigosPorData(final @PathParam("order") String order) throws Exception  {
+        try {
+            return Response.status(Response.Status.OK).entity(dao.buscarListaArtigosPorData(order)).build();
+        } catch (InvalidParameterException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Parâmetro de ordem inválido: " + order).build();
+        }
+    }
 
     @POST
     @Path("/add")
