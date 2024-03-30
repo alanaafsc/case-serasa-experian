@@ -11,19 +11,74 @@ type ArticleType = {
     publicationDate: string;
 };
 
-const Artigos: React.FC = () => {
+const Artigos: React.FC<{ autoresSelecionados: string[]; ordenacao: 'asc' | 'desc' | null }> = ({ autoresSelecionados, ordenacao }) => {
+
     const [articles, setArticles] = useState<ArticleType[]>([]);
 
+    // useEffect(() => {
+    //     const autoresQuery = autoresSelecionados.map(autor => `autores=${encodeURIComponent(autor)}`).join('&');
+    //     const url = autoresSelecionados.length > 0
+    //         ? `http://localhost:8080/v1/artigos/autores?${autoresQuery}`
+    //         : 'http://localhost:8080/v1/artigos';
+    
+    //     fetch(url)
+    //         .then(response => response.json())
+    //         .then((data: ArticleType[]) => setArticles(data.map((article: ArticleType) => ({
+    //             ...article,
+    //             publicationDate: format(new Date(article.publicationDate), 'dd/MM/yyyy')
+    //         }))))
+    //         .catch(error => console.error('Error fetching articles:', error));
+    // }, [autoresSelecionados]);
     useEffect(() => {
-        fetch('http://localhost:8080/v1/artigos')
-            .then(response => response.json())
-            .then((data: ArticleType[]) => setArticles(data.map((article: ArticleType) => ({ 
-                ...article,
-                publicationDate: format(new Date(article.publicationDate), 'dd/MM/yyyy') 
-            }))))
-            .catch(error => console.error('Error fetching articles:', error));
-    }, []);
-
+        console.log(ordenacao);
+        const autoresQuery = autoresSelecionados.map(autor => `autores=${encodeURIComponent(autor)}`).join('&');
+        const url = autoresSelecionados.length > 0 ? `http://localhost:8080/v1/artigos/autores?${autoresQuery}` : 'http://localhost:8080/v1/artigos';
+    
+        fetch(url)
+          .then(response => response.json())
+          .then((data: any[]) => {
+            let sortedArticles = data.map((article: any) => ({
+              ...article,
+              publicationDate: format(new Date(article.publicationDate), 'dd/MM/yyyy'), // Formatando a data antes de renderizar
+            }));
+    
+            if (ordenacao) {
+                sortedArticles = sortedArticles.sort((a, b) => {
+                    // Verificar se o formato da data é 'dd/MM/yyyy' e ajustar para 'MM/dd/yyyy' se necessário
+                    const formattedDateA = a.publicationDate.includes('/')
+                        ? a.publicationDate.split('/').reverse().join('/')
+                        : a.publicationDate;
+                    const formattedDateB = b.publicationDate.includes('/')
+                        ? b.publicationDate.split('/').reverse().join('/')
+                        : b.publicationDate;
+            
+                    const dateA = new Date(formattedDateA);
+                    const dateB = new Date(formattedDateB);
+            
+                    console.log('Data A (antes):', a.publicationDate, 'Data B (antes):', b.publicationDate);
+                    console.log('Data A (depois):', dateA, 'Data B (depois):', dateB);
+            
+                    let comparisonResult = 0;
+                    if (ordenacao === 'asc') {
+                        comparisonResult = dateA.getTime() - dateB.getTime();
+                    } else {
+                        comparisonResult = dateB.getTime() - dateA.getTime();
+                    }
+            
+                    console.log('Resultado da comparação:', comparisonResult);
+            
+                    return comparisonResult;
+                });
+            }
+            
+            console.log(sortedArticles)
+            setArticles(sortedArticles);
+          })
+          .catch(error => console.error('Error fetching articles:', error));
+      }, [autoresSelecionados, ordenacao]);
+    
+    
+    
     return (
         <div className={styles.artigos}>
             <Divider />
@@ -38,4 +93,3 @@ const Artigos: React.FC = () => {
 };
 
 export default Artigos;
-

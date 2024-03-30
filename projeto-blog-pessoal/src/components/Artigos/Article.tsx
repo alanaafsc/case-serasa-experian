@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styles from './Article.module.css';
 import IconLinkedin from './linkedin-icon.svg';
 import IconTwitter from './twitter-icon.svg';
@@ -37,7 +37,6 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
                 </div>
             </div>
             <div className={styles.content}>
-                {/* Conteúdo do artigo */}
                 <div className={styles.title}>{title}</div>
                 <div className={styles.text}>{content}</div>
             </div>
