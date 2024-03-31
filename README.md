@@ -81,24 +81,6 @@ Se os testes executarem com sucesso, o resultado da cobertura estará localizado
 
 ## Banco de Dados
 
-Para executar o banco de dados, foi utilizado o Docker com o seguinte comando:
+O H2 é um banco de dados SQL de código aberto, escrito em Java, que foi utilizado no projeto Quarkus. Ele é conhecido por sua leveza, velocidade e facilidade de uso. Sendo relacional, armazena dados em tabelas relacionadas por chaves estrangeiras. Pode operar em modo de memória, útil para testes e prototipagem rápida, e pode ser incorporado diretamente em aplicativos Java, eliminando a necessidade de um servidor de banco de dados separado. Oferece suporte à maioria das características padrão do SQL e transações ACID (Atomicidade, Consistência, Isolamento e Durabilidade), garantindo a integridade e consistência dos dados. No Quarkus, é comumente utilizado em aplicações de teste e desenvolvimento, devido à sua facilidade de uso e configuração simples.
 
-```
-docker run -d \     
-    --name meu-postgres \
-    -p 5432:5432 \
-    -e POSTGRES_USER=username_blog \
-    -e POSTGRES_PASSWORD=password \
-    -e POSTGRES_DB=articles \
-    postgres:latest
-```
-
-Este comando inicia um contêiner do PostgreSQL usando a imagem mais recente disponível. Aqui está o que cada opção faz:
-
--d: Executa o contêiner em segundo plano (modo detached).
---name meu-postgres: Define o nome do contêiner como "meu-postgres".
--p 5432:5432: Mapeia a porta 5432 do host para a porta 5432 do contêiner, permitindo acessar o PostgreSQL do host.
--e POSTGRES_USER=username_blog: Define o nome de usuário como "username_blog".
--e POSTGRES_PASSWORD=password: Define a senha do usuário como "password".
--e POSTGRES_DB=articles: Cria um banco de dados chamado "articles" ao iniciar o contêiner.
-Com este comando, o PostgreSQL será iniciado e estará pronto para ser utilizado.
+As configurações do H2 estão localizadas no arquivo application.properties do projeto Quarkus. Ao iniciar, o H2 automaticamente executa um script SQL presente no arquivo import.sql, permitindo uma inicialização rápida com dados pré-existentes ou de teste.
