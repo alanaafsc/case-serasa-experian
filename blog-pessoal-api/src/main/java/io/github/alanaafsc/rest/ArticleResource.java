@@ -2,7 +2,6 @@ package io.github.alanaafsc.rest;
 
 import io.github.alanaafsc.persistence.dao.ArticleDao;
 import io.github.alanaafsc.persistence.dto.ArticleDTO;
-import io.github.alanaafsc.persistence.dto.AutoresRequestDTO;
 import io.github.alanaafsc.persistence.models.Article;
 import io.github.alanaafsc.services.ArticleService;
 import jakarta.enterprise.context.RequestScoped;
