@@ -6,14 +6,12 @@
     flex-direction: column;
     margin-top: 40px;
     margin-bottom: 40px;
-    /* Adicione outras propriedades conforme necessário */
 }
 
 .content {
     width: 100%;
     height: 75%;
     gap: 24px;
-    /* Adicione outras propriedades conforme necessário */
 }
 
 .title {
@@ -39,7 +37,6 @@
     height: 40px;
     display: flex;
     justify-content: space-between;
-    /* Adicione outras propriedades conforme necessário */
 }
 
 .author {
