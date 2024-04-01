@@ -5,12 +5,14 @@ import static org.mockito.Mockito.*;
 
 import io.github.alanaafsc.persistence.dao.ArticleDao;
 import io.github.alanaafsc.persistence.models.Article;
+import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+@QuarkusTest
 public class ArticleServiceTest {
 
     @InjectMocks
