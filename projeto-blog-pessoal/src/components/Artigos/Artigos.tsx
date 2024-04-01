@@ -15,20 +15,6 @@ const Artigos: React.FC<{ autoresSelecionados: string[]; ordenacao: 'asc' | 'des
 
     const [articles, setArticles] = useState<ArticleType[]>([]);
 
-    // useEffect(() => {
-    //     const autoresQuery = autoresSelecionados.map(autor => `autores=${encodeURIComponent(autor)}`).join('&');
-    //     const url = autoresSelecionados.length > 0
-    //         ? `http://localhost:8080/v1/artigos/autores?${autoresQuery}`
-    //         : 'http://localhost:8080/v1/artigos';
-    
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then((data: ArticleType[]) => setArticles(data.map((article: ArticleType) => ({
-    //             ...article,
-    //             publicationDate: format(new Date(article.publicationDate), 'dd/MM/yyyy')
-    //         }))))
-    //         .catch(error => console.error('Error fetching articles:', error));
-    // }, [autoresSelecionados]);
     useEffect(() => {
         console.log(ordenacao);
         const autoresQuery = autoresSelecionados.map(autor => `autores=${encodeURIComponent(autor)}`).join('&');
@@ -44,7 +30,6 @@ const Artigos: React.FC<{ autoresSelecionados: string[]; ordenacao: 'asc' | 'des
     
             if (ordenacao) {
                 sortedArticles = sortedArticles.sort((a, b) => {
-                    // Verificar se o formato da data é 'dd/MM/yyyy' e ajustar para 'MM/dd/yyyy' se necessário
                     const formattedDateA = a.publicationDate.includes('/')
                         ? a.publicationDate.split('/').reverse().join('/')
                         : a.publicationDate;
