@@ -49,6 +49,12 @@ Este comando compila o aplicativo para produção na pasta build. Ele combina co
 
 ### Iniciar o Projeto
 
+Para acessar o diretório do projeto:
+
+```shell
+cd blog-pessoal-api
+```
+
 Para executar a aplicação em modo de desenvolvimento:
 
 ```shell
